@@ -30,12 +30,12 @@ Source: https://github.com/imathis/adn-timeline/
       }
       for (_i = 0, _len = optionsArray.length; _i < _len; _i++) {
         options = optionsArray[_i];
-        $(options.el || this.defaults.el).each(function(i, el) {
+        jQuery(options.el || this.defaults.el).each(function(i, el) {
           var callback, renderer, _ref, _ref1;
-          el = $(el);
+          el = jQuery(el);
           renderer = options.render || _this.render;
           callback = options.callback || (function() {});
-          options = $.extend({}, _this.defaults, options, el.data());
+          options = jQuery.extend({}, _this.defaults, options, el.data());
           options.el = el;
           options.username = (_ref = options.username) != null ? _ref.replace('@', '') : void 0;
           options.hashtag = (_ref1 = options.hashtag) != null ? _ref1.replace('#', '') : void 0;
@@ -101,10 +101,10 @@ Source: https://github.com/imathis/adn-timeline/
         fetch: function(renderer, callback, options) {
           var data, posts, url,
             _this = this;
-          if ($.cookie && options.cookie && (posts = $.cookie(options.cookie))) {
+          if (jQuery.cookie && options.cookie && (posts = jQuery.cookie(options.cookie))) {
             data = JSON.parse(posts);
             if (data.length !== options.count) {
-              $.removeCookie(options.cookie);
+              jQuery.removeCookie(options.cookie);
               return this.fetch(renderer, callback, options);
             } else {
               renderer(options, data);
@@ -125,7 +125,7 @@ Source: https://github.com/imathis/adn-timeline/
               url += "&include_directed_posts=0";
             }
             url += "&callback=?";
-            return $.ajax({
+            return jQuery.ajax({
               url: url,
               dataType: 'jsonp',
               error: function(err) {
@@ -160,8 +160,8 @@ Source: https://github.com/imathis/adn-timeline/
                     }
                     return _results;
                   }).call(_this);
-                  if ($.cookie && options.cookie) {
-                    $.cookie(options.cookie, JSON.stringify(_this.data, {
+                  if (jQuery.cookie && options.cookie) {
+                    jQuery.cookie(options.cookie, JSON.stringify(_this.data, {
                       path: '/'
                     }));
                   }
